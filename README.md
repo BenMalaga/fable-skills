@@ -21,6 +21,7 @@ the lesson without paying for it again.
 | [measured-sweep](skills/measured-sweep/SKILL.md) | Audits whose findings are opinions; a "16mm offset" that was an anchor-convention misread |
 | [idea-gauntlet](skills/idea-gauntlet/SKILL.md) | Brainstorms where nothing gets killed and datasets turn out not to exist |
 | [doc-truth-refresh](skills/doc-truth-refresh/SKILL.md) | A tracker that said "patent unfiled" three weeks after filing |
+| [durable-background-work](skills/durable-background-work/SKILL.md) | One host restart killed three parallel agents and a scheduled loop; uncommitted work evaporated |
 | [skill-distiller](skills/skill-distiller/SKILL.md) | Solving the same hard problem twice - the meta-skill that generates new skills from sessions |
 | [kicad-hardware-verification](skills/kicad-hardware-verification/SKILL.md) | Backwards jacks, dead controls, and copper past the board edge - caught as bytes, not resin |
 
