@@ -13,7 +13,8 @@ proof.
 
 1. **Partition into dimensions** - independent slices (per-subsystem, per-file-
    class, per-claim-type) that different agents can sweep in parallel without
-   overlapping.
+   overlapping. Assign every file class to exactly one sweeper; a finding that
+   straddles two dimensions gets dropped by both unless ownership is explicit.
 2. **Read-only, hard rule.** The sweep MEASURES; it never fixes, regenerates,
    or "cleans up while it's in there." Fixes come after synthesis, prioritized.
    State this in every sweep prompt: no writes, no generator runs.
@@ -36,14 +37,17 @@ proof.
 
 - Findings quoting documentation as evidence. Docs are subjects of the audit,
   never sources of truth for it.
-- Severity inflation: reserve CRITICAL for "physically breaks the deliverable."
+- Severity inflation: reserve the top severity for findings that physically
+  break the deliverable.
 - Fixing during the sweep: a sweeper that edits invalidates its siblings'
   measurements mid-flight.
-- Trusting one measurement style: verify the semantic too (a footprint's
-  anchor may be pad-1, not center; a bounding box may include label text).
-  When a finding drives a physical change, re-derive it from primary geometry
-  before acting - one real sweep mis-called a 16mm "offset" that was actually
-  an anchor-convention misread, and the "fix" made the board worse.
+- Trusting one measurement style: verify the semantic behind the number too
+  (an anchor point may be pad-1, not center; a count may include headers or
+  labels; conventions like axis direction and units can flip at tool
+  boundaries).
+- Acting on a finding without re-deriving it from primary sources: one real
+  sweep mis-called a 16mm "offset" that was actually an anchor-convention
+  misread, and the "fix" made the artifact worse.
 
 ## After the sweep
 

@@ -1,6 +1,6 @@
 ---
 name: verify-dont-claim
-description: Before reporting any work as done (yours or a subagent's), verify it with your own tools against the real artifact. Use whenever accepting a completion report from a subagent, before telling the user something is fixed/deployed/routed/built, and before making a decision based on another agent's findings.
+description: Verify claims against the real artifact before repeating them. Use when accepting a completion report from a subagent or background process, before reporting any state you did not directly observe this session (deployed, built, migrated, data changed), and before making a decision based on another agent's findings.
 ---
 
 # Verify, don't claim
@@ -20,13 +20,13 @@ a claim.
 
 | Claimed | Verify with |
 |---|---|
-| File changed/committed | `git log -1` + `git diff --quiet HEAD -- <path>`; read the actual hunk |
+| File changed/committed | `git log -1 -- <path>` (must show the claimed commit) + `git status --porcelain -- <path>` (must be empty) + `git show HEAD:<path>` to read the actual committed hunk. `git diff --quiet HEAD` passes for untracked files - it cannot prove a commit exists |
 | Build passes | Run the build yourself; read the exit code, not the summary |
-| Web UI works | Load it fresh (cleared storage), read the DOM/console, screenshot; a synthetic probe that returns all-false while the screenshot shows content means YOUR PROBE is broken - reconcile before concluding |
-| Binary/geometry artifact | Hash it (md5) against the expected source of truth; compare counts (faces, rows, bytes) against the committed version |
+| Web UI works | Load it fresh (cleared storage), read the DOM/console, screenshot; if probe and screenshot disagree, see below |
+| Binary/geometry artifact | Hash it against the expected source of truth; compare counts (faces, rows, bytes) against the committed version |
 | Long process finished | Check the OUTPUT artifact exists, not that the process exited; exit 0 with no output file is a failure |
-| Locked/protected files untouched | MD5 every one against git HEAD after ANY operation that could touch them, every time, even when "obviously" safe |
-| Deployed | Fetch the live URL and compare content hash to local; a passing build does not mean the deploy served it (prebuilt-output dirs can silently override builds) |
+| Locked/protected files untouched | Hash the output of `git show HEAD:<path>` (`md5` on macOS, `md5sum` on Linux) and compare to the working file's hash, after ANY operation that could touch them, even when "obviously" safe |
+| Deployed | Fetch the live URL and confirm the specific change is present (a marker string or version stamp you added); compare content hashes only when the pipeline serves files byte-identical. A passing build does not mean the deploy served it (prebuilt-output dirs can silently override builds) |
 | Counts/positions/measurements | Re-measure from the primary artifact (board file, database, DOM), never from a doc or a previous report |
 
 ## When two sources disagree
@@ -41,4 +41,6 @@ attached to a dead browser context. Reconcile the instruments before ruling.
 Verification is almost always under 60 seconds. An unverified false "done"
 costs hours: the user builds on it, downstream agents build on it, and the
 eventual unwind is public. One project logged a full workday lost to a single
-unverified overwrite. The check is never the expensive part.
+unverified overwrite (the snapshot-before-regenerate skill in this collection
+encodes the preventive side of that incident). The check is never the
+expensive part.

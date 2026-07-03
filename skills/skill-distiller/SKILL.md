@@ -1,13 +1,16 @@
 ---
 name: skill-distiller
-description: Mine a work session, postmortem, or memory file for hard-won lessons and emit them as new reusable skills. Use when the user asks to "create skills from this session", after any debugging war or multi-day project with non-obvious lessons, or on a recurring cadence to compound an agent's capabilities.
+description: Mine a work session, postmortem, or memory file for hard-won lessons and emit them as new reusable skills. Use when the user asks to "create skills from this session", after any debugging war or multi-day project with non-obvious lessons, or when a scheduled retro or maintenance task asks for lessons from recent sessions.
 ---
 
 # The skill distiller
 
 An agent that solves a hard problem and writes nothing down solves it again
 next month at full price. This skill turns session experience into new SKILL.md
-files - the compounding loop.
+files - the compounding loop. Origin incident: a days-long war with an
+autorouter that appeared slow produced a hard lesson that lived only in chat
+scrollback; only after it was distilled into a skill did the next session get
+it for free.
 
 ## What qualifies as a skill (the quality bar)
 
@@ -41,9 +44,13 @@ A lesson becomes a skill only if ALL four hold:
    lookup content, prose for judgment content.
 4. **Adversarial pass**: for each draft, ask "would a strong model without
    this skill already do this?" If yes, cut or sharpen until the answer is no.
-5. **Install and ship**: place in the skills directory the target agent loads
-   (project `.claude/skills/<name>/SKILL.md` or user-level `~/.claude/skills/`),
-   and version-control the collection so other agents and people can adopt it.
+5. **Trigger test**: write 3 realistic situations where the skill should fire
+   and 3 near-misses where it should not; reading only the description, check
+   it discriminates all 6 correctly. Rewrite the description until it does.
+6. **Install and ship**: place in the skills directory the target agent loads
+   (for Claude Code: project `.claude/skills/<name>/SKILL.md` or user-level
+   `~/.claude/skills/`; other harnesses use their own locations), and
+   version-control the collection so other agents and people can adopt it.
 
 ## Anti-patterns
 

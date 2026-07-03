@@ -24,8 +24,15 @@ the lesson without paying for it again.
 | [durable-background-work](skills/durable-background-work/SKILL.md) | One host restart killed three parallel agents and a scheduled loop; uncommitted work evaporated |
 | [skill-distiller](skills/skill-distiller/SKILL.md) | Solving the same hard problem twice - the meta-skill that generates new skills from sessions |
 | [kicad-hardware-verification](skills/kicad-hardware-verification/SKILL.md) | Backwards jacks, dead controls, and copper past the board edge - caught as bytes, not resin |
+| [snapshot-before-regenerate](skills/snapshot-before-regenerate/SKILL.md) | A generator re-run silently destroyed a hand-approved artifact that existed nowhere else; a full workday lost |
+| [human-gate-registry](skills/human-gate-registry/SKILL.md) | Agents attempting, or falsely reporting done, actions only the human may take (payments, publishes, live sends) |
+| [publish-preflight-scrub](skills/publish-preflight-scrub/SKILL.md) | A private repo nearly flipped public with a home-directory path and an unfinished result in the pushed tree |
 
 ## Install
+
+```bash
+git clone https://github.com/BenMalaga/fable-skills && cd fable-skills
+```
 
 For one project:
 
@@ -42,7 +49,8 @@ cp -R skills/* ~/.claude/skills/
 ```
 
 Claude Code discovers `SKILL.md` files automatically; each skill's
-`description` frontmatter tells the model when to reach for it.
+`description` frontmatter tells the model when to reach for it. Individual
+skill folders can also be copied selectively.
 
 ## Format
 

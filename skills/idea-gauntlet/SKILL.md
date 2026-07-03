@@ -1,13 +1,15 @@
 ---
 name: idea-gauntlet
-description: Generate ideas through diverse lenses, then adversarially vet each one with real-world checks before any ranking. Use when brainstorming products, research questions, features, or strategies where plausible-but-wrong ideas are expensive - anything that will consume weeks if picked badly.
+description: Generate ideas through diverse lenses, then adversarially vet each one with real-world checks before any ranking. Use when brainstorming products, research questions, features, or strategies where plausible-but-wrong ideas are expensive - anything that will consume weeks if picked badly. Also use when vetting or ranking an existing list of ideas or options before committing to one.
 ---
 
 # The idea gauntlet
 
 Brainstorms fail in two ways: everything comes from one angle, and nothing gets
 killed. This pattern fixes both: diverse generation, then a skeptic per idea
-whose job is execution, not enthusiasm.
+whose job is execution, not enthusiasm. Separate agents are an optimization,
+not a requirement: the three phases work sequentially in one session; distinct
+contexts just keep the skeptic from grading its own homework.
 
 ## Phase 1 - Generate through lenses
 
@@ -16,8 +18,10 @@ data source, failure mode - whatever axis suits the space). Each lens gets a
 quota and a hard constraint list (budget, tooling, legal lines). Crucially:
 generators must GROUND each idea before submitting it - if an idea depends on
 a dataset, API, or market fact, the generator verifies it exists (a real web
-check, not a memory) before the idea makes the list. Ungroundable ideas cost
-the vetting phase real money.
+or tool check, not a memory) before the idea makes the list. Ungroundable
+ideas cost the vetting phase real time and compute. Anchor: in one 20-idea
+run, three finalists depended on a public dataset that did not exist; each
+burned a full vetting pass before dying.
 
 ## Phase 2 - Adversarial vetting, one skeptic per idea
 
@@ -38,9 +42,17 @@ decoration.
 
 ## Phase 3 - Rank with explicit dimensions
 
-A single director agent scores survivors on named dimensions (impact-if-true,
-effort-to-result, dependency solidity, strategic fit, value-of-a-null) and
-picks "start first" candidates using queue reality (what fits in the gaps of
+A single director agent scores survivors on named dimensions:
+
+| Dimension | Question it answers |
+|---|---|
+| impact-if-true | If this works, how much does it matter? |
+| effort-to-result | How long until the first real signal? |
+| dependency solidity | How verified is the load-bearing resource? |
+| strategic fit | Does it serve a goal the requester already holds? |
+| value-of-a-null | Is a negative result still worth having? |
+
+It picks "start first" candidates using queue reality (what fits in the gaps of
 current work) - not just the top scores. Time-sensitive ideas (open scoop
 windows, expiring data) outrank slightly-better ideas without deadlines.
 

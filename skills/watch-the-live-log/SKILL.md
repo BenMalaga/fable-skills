@@ -31,20 +31,17 @@ the first minute of the first log.
 3. **One cheap kill-experiment per theory.** Before a fix that costs a long
    retry, design a test that falsifies the theory in under 5 minutes (e.g.
    delete the suspect element from a COPY of the input and run briefly).
-4. **When two heuristics disagree, read the ground truth.** Two different
-   inference methods giving opposite answers means neither is trustworthy;
-   go read the primary definition (the file format, the datasheet, the source).
-5. **Check memory/docs for prior wars.** If the project has notes on this tool,
-   read them BEFORE the second retry, not after the fifth. The battle has
-   usually been fought before, and the notes contain the exact trap.
-6. **After solving, write the postmortem into memory** with the false theories
-   listed explicitly as false, so the next session does not re-walk them.
+4. **Check project notes before the second retry, and record false theories
+   after.** If the project has notes on this tool, read them before retry two,
+   not after retry five. After solving, write the false theories down
+   explicitly as false (see skill-distiller) so the next session does not
+   re-walk them.
 
 ## Signature smells
 
-- Same operation retried with tweaked parameters more than twice: stop, instrument.
-- "It works for small inputs" without knowing which PHASE differs: instrument.
-- A tool that succeeds interactively but fails headless: suspect exit/save
-  paths and non-daemon threads, not the core operation.
-- Process killed on timeout leaves no output: the output may only be written
-  at graceful exit - the work may be succeeding and getting discarded.
+| Smell | Response |
+|---|---|
+| Same operation retried with tweaked parameters more than twice | Stop, instrument |
+| "Works for small inputs" without knowing which phase differs | Instrument before scaling theories |
+| Succeeds interactively, fails headless | Suspect exit/save paths and non-daemon threads, not the core operation |
+| Killed-on-timeout run leaves no output | Output may only be written at graceful exit; the work may be succeeding and getting discarded |
