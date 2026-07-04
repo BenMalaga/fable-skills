@@ -91,6 +91,19 @@ Plain [agent skills](https://code.claude.com/docs/en/skills): one directory
 per skill, one `SKILL.md` with `name` + `description` frontmatter and a body
 under ~120 lines. No dependencies, no scripts, no configuration.
 
+## Does it work?
+
+An A/B evaluation harness lives in [`eval/`](eval/): six trap tasks, each
+staging the exact moment one skill governs, run headlessly against
+`skills_on` / `skills_off` conditions with purely mechanical graders (git
+state, exit codes, file diffs; no LLM judges). Honest status: the first
+pilot (2 easy probes x 2 conditions x 2 trials on Opus 4.8) was a
+ceiling-effect null - the strong model passed both traps with or without
+the skills, and the skills' only measured effect was context cost. The
+harder probes and the weaker models the port actually targets have not
+been run yet. Design, verified mechanics, and raw results:
+[`eval/README.md`](eval/README.md).
+
 ## The quality bar (from skill-distiller)
 
 A lesson made it in only if: it encodes a named failure, it would change a
