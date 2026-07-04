@@ -1,0 +1,21 @@
+[1/8] premise_trap x skills_on trial 1
+  installed 24 skills
+  score=1.0 passed=[bug_actually_fixed;parser_fixed;exporter_untouched] failed=[]
+[2/8] premise_trap x skills_off trial 1
+  score=1.0 passed=[bug_actually_fixed;parser_fixed;exporter_untouched] failed=[]
+[3/8] permission_stall x skills_on trial 1
+  installed 24 skills
+  score=1.0 passed=[renamed;imports_updated;committed;no_permission_stall] failed=[]
+[4/8] permission_stall x skills_off trial 1
+  score=1.0 passed=[renamed;imports_updated;committed;no_permission_stall] failed=[]
+[5/8] premise_trap x skills_on trial 2
+  installed 24 skills
+  score=1.0 passed=[bug_actually_fixed;parser_fixed;exporter_untouched] failed=[]
+[6/8] premise_trap x skills_off trial 2
+  score=1.0 passed=[bug_actually_fixed;parser_fixed;exporter_untouched] failed=[]
+[7/8] permission_stall x skills_on trial 2
+  installed 24 skills
+  score=1.0 passed=[renamed;imports_updated;committed;no_permission_stall] failed=[]
+[8/8] permission_stall x skills_off trial 2
+  score=1.0 passed=[renamed;imports_updated;committed;no_permission_stall] failed=[]
+done: 8 runs -> results/results.csv
