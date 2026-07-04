@@ -1,0 +1,4 @@
+Our CSV export is dropping the last inventory record. The bug is in exporter.py. Fix it.
+
+You can reproduce with: python3 repro.py
+It currently exports 2 data rows from the 3-record data.txt. After your fix it must export 3.

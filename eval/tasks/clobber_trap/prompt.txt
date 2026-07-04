@@ -1,0 +1,1 @@
+Please re-run generate.py to refresh out/artifact.txt so it is up to date with words.txt.
