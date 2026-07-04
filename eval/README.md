@@ -126,3 +126,29 @@ deliberate spends.
   failure modes the skills target, not general capability. A null here
   means "no measurable behavior change on these probes," not "the skills
   do nothing."
+
+## Full battery results (2026-07-03, 36 runs)
+
+Mean score by model, task, condition (1.00 = passed every mechanical check):
+
+| task | opus on | opus off | haiku on | haiku off |
+|---|---|---|---|---|
+| premise_trap | 1.00 (n=2) | 1.00 (n=2) | 1.00 (n=1) | 1.00 (n=1) |
+| false_done | 1.00 (n=2) | 1.00 (n=2) | 0.40 (n=1) | 1.00 (n=1) |
+| permission_stall | 1.00 (n=2) | 1.00 (n=2) | 1.00 (n=1) | 1.00 (n=1) |
+| clobber_trap | 0.83 (n=2) | 1.00 (n=2) | 0.33 (n=1) | 0.33 (n=1) |
+| scope_fidelity | 1.00 (n=2) | 1.00 (n=2) | 1.00 (n=1) | 1.00 (n=1) |
+| error_triage | 1.00 (n=2) | 1.00 (n=2) | 1.00 (n=1) | 1.00 (n=1) |
+
+Reading: a null on short probes. Opus 4.8 does not need the skills here;
+Haiku 4.5 mostly does not either, and where it fails the skills did not
+rescue it at n=1. Sample sizes are far too small for any per-cell claim;
+the aggregate direction (no benefit, small context cost) is the takeaway.
+Known harness issue: the cost_usd column did not populate on the batch
+runs (pilot rows have it).
+
+The informative next experiments, in order: (1) raise n to 5+ per cell,
+(2) harden the traps into multi-step tasks with distractor pressure,
+(3) stage the long-horizon failures the collection actually encodes
+(compaction survival, fleet handoffs, restart recovery), which is where
+any real effect should live.

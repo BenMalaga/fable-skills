@@ -96,13 +96,28 @@ under ~120 lines. No dependencies, no scripts, no configuration.
 An A/B evaluation harness lives in [`eval/`](eval/): six trap tasks, each
 staging the exact moment one skill governs, run headlessly against
 `skills_on` / `skills_off` conditions with purely mechanical graders (git
-state, exit codes, file diffs; no LLM judges). Honest status: the first
-pilot (2 easy probes x 2 conditions x 2 trials on Opus 4.8) was a
-ceiling-effect null - the strong model passed both traps with or without
-the skills, and the skills' only measured effect was context cost. The
-harder probes and the weaker models the port actually targets have not
-been run yet. Design, verified mechanics, and raw results:
-[`eval/README.md`](eval/README.md).
+state, exit codes, file diffs; no LLM judges).
+
+Honest status after 36 runs (all 6 tasks, Opus 4.8 at n=2 per cell, Haiku
+4.5 at n=1 per cell): **a null on short single-session probes.** Opus 4.8
+passes essentially everything with or without the skills (23 of 24 cells
+at 1.00; the one exception was a partial score in a skills_on trial).
+Haiku 4.5 also passes most traps bare; where it fails (clobber_trap, 0.33),
+the skills did not rescue it at n=1. The only consistently measured effect
+of loading 24 skills on these probes is context cost (about +15% dollars,
++19% wall-clock in the pilot).
+
+What this does and does not show: these probes are single-task and
+minutes-long. The failure modes the collection encodes were observed in
+marathon multi-hour sessions, agent fleets, context compaction, and host
+restarts - horizons this harness cannot cheaply stage. Twice on the day
+this eval was built, real background agents (with these skills installed)
+still parked themselves waiting for notifications that could never arrive,
+which suggests skills work as consultable checklists at decision moments,
+not as passive behavioral vaccines. If you adopt this collection, treat it
+as documentation your agent can reach for, verify value on your own long
+tasks, and read [`eval/README.md`](eval/README.md) for the full table, raw
+CSV, and limitations before believing anyone's claims - including ours.
 
 ## The quality bar (from skill-distiller)
 
